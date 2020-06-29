@@ -32,50 +32,82 @@ class MyApp extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 15),
-                        child: Row(
-                          children: <Widget>[
-                            CircleAvatar(
-                              minRadius: 30,
-                              backgroundColor: Colors.orange,
-                              child: Text(
-                                (index + 1).toString(),
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                        child: GestureDetector(
+                          onTap: () {
+                            return showDialog<void>(
+                        context: context,
+                          // barrierDismissible: false,
+                          builder: (BuildContext conext) {
+                          return AlertDialog(
+                            insetPadding: EdgeInsets.all(15),
+                            title: Text(pointsData[index]['heading'],
+                            style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold
+                            ),),
+                            content:
+                              Text(pointsData[index]['details'],
+                              style: TextStyle(
+                                fontSize: 18,
+                            letterSpacing: 1.4
+                            ),),
+                            actions: <Widget>[
+                              FlatButton(
+                                child: Text("That's Right"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
                               ),
-                            ),
-                            SizedBox(
-                              width: 15.0,
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Text(
-                                      pointsData[index]['heading'],
-                                      maxLines: 2,
-                                      overflow: TextOverflow.fade,
+                            ],
+                          );
+                        },
+                      );
+                          },
+                          child: Row(
+                            children: <Widget>[
+                              CircleAvatar(
+                                minRadius: 30,
+                                backgroundColor: Colors.orange,
+                                child: Text(
+                                  (index + 1).toString(),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15.0,
+                              ),
+                              Expanded(
+                                child: Column(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Text(
+                                        pointsData[index]['heading'],
+                                        maxLines: 2,
+                                        overflow: TextOverflow.fade,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    Text(
+                                      pointsData[index]['details'],
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 4,
+                                      softWrap: true,
                                       style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600),
+                                        fontSize: 18,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  Text(
-                                    pointsData[index]['details'],
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 4,
-                                    softWrap: true,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
